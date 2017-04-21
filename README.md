@@ -33,9 +33,10 @@ By default this will run on http://localhost:3001 as the backend server for the 
 ### These are the Gulp.js tasks for your dev process: ###
 
 * `gulp init` - Runs the Semantic UI build.
+* `gulp init` - For some buggy reason, we have to run gulp init twice at the moment....
 
-* `gulp watch:dev` - Watches development files and runs builds when needed.
+* `gulp watch:dev` - Watches development files and runs builds when needed. (note this will go away, this is the old frontend code)
 
 * `gulp serve:dev` - Starts the Hapi server and serves the files.
 
-* `gulp test` - Runs the Mocha tests in the Karma test runner.
+* `gulp test` - Runs the Mocha tests in the Karma test runner. (going away soon)
