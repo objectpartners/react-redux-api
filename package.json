@@ -1,8 +1,8 @@
 {
-  "name": "timesheetz",
-  "title": "Timesheet Application",
+  "name": "timesheetzApi",
+  "title": "Timesheet Api Application",
   "main": "./api/server.js",
-  "description": "Timesheet application for React training labs",
+  "description": "Timesheet API backend for React Redux training labs",
   "version": "0.0.1",
   "scripts": {
     "run_dev": "NODE_ENV=development nodemon api/server.js",
