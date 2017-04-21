@@ -47,11 +47,9 @@ server.register(cookie, function (err) {
 
 // register the routes
 server.register([
-  require('./routes/file.route'),
   require('./routes/auth.routes'),
   require('./routes/projects.routes'),
-  require('./routes/users.routes'),
-  require('./routes/index.route')
+  require('./routes/users.routes')
 ], function (err) {
   if (err) console.log('Error registering routes: ' + err);
 });
