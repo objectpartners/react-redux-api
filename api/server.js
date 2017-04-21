@@ -8,6 +8,8 @@ console.log('Booting Development Server');
 
 var server = new Hapi.Server();
 
+server.realm.modifiers.route.prefix = props.server.routePrefix;
+
 server.connection({
   port: props.server.port,
   host: 'localhost'
