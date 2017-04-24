@@ -16,8 +16,6 @@ module.exports = {
 
   server : {
     port: 3001,
-
-    //TODO: Jeff - change this to /api at some point when we remove the old client code
-    routePrefix: ''
+    routePrefix: '/api'
   }
 };
