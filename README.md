@@ -17,7 +17,6 @@ By default this will run on http://localhost:3001/api as the backend server for 
 #### Install the Node dependencies locally. ####
 `npm install`
 
-## Gulp Tasks ##
-### These are the Gulp.js tasks for your dev process: ###
+#### Start the dev process: ####
 
 * `npm start` - Starts the Hapi server and serves the files.
