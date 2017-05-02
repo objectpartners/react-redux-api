@@ -17,6 +17,6 @@ By default this will run on http://localhost:3001/api as the backend server for 
 #### Install the Node dependencies locally. ####
 `npm install`
 
-#### Start the dev process: ####
+#### Start the backend API server: ####
 
 * `npm start` - Starts the Hapi server and serves the files.
