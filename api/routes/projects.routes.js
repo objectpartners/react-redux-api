@@ -12,31 +12,31 @@ exports.register = function (server, options, next) {
       method: 'GET',
       path: projects,
       handler: projectsController.index,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'POST',
       path: projects,
       handler: projectsController.create,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'GET',
       path: projectId,
       handler: projectsController.show,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'PUT',
       path: projectId,
       handler: projectsController.update,
-      config: {auth: false, cors: {origin: ['*'], credentials: true, methods: ['PUT']}}
+      config: {auth: false}
     },
     {
       method: 'DELETE',
       path: projectId,
       handler: projectsController.destroy,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     }
   ]);
 

@@ -16,69 +16,69 @@ exports.register = function (server, options, next) {
   server.route([
     {
       method: 'GET', path: users, handler: usersController.index,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'POST', path: users, handler: usersController.create,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'GET', path: userId, handler: usersController.show,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'PUT', path: userId, handler: usersController.update,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'DELETE', path: userId, handler: usersController.destroy,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     }
   ]);
 
   server.route([
     {
       method: 'GET', path: timesheets, handler: timesheetsController.index,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'POST', path: timesheets, handler: timesheetsController.create,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'GET', path: timesheetId, handler: timesheetsController.show,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'PUT', path: timesheetId, handler: timesheetsController.update,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'DELETE', path: timesheetId, handler: timesheetsController.destroy,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     }
   ]);
 
   server.route([
     {
       method: 'GET', path: timeunits, handler: timeunitsController.index,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'POST', path: timeunits, handler: timeunitsController.create,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'GET', path: timeunitId, handler: timeunitsController.show,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'PUT', path: timeunitId, handler: timeunitsController.update,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     },
     {
       method: 'DELETE', path: timeunitId, handler: timeunitsController.destroy,
-      config: {auth: false, cors: {origin: ['*'], credentials: true}}
+      config: {auth: false}
     }
   ]);
 
