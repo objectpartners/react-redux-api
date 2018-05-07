@@ -1,12 +1,14 @@
 {
-  "name": "timesheetzApi",
-  "title": "Timesheet Api Application",
+  "name": "@objectpartners/timesheets-api",
   "main": "./api/server.js",
   "description": "Timesheet API backend for React Redux training labs",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
-    "start": "NODE_ENV=development & node api/server.js",
-    "run_prod": "NODE_ENV=production node api/server.js",
+    "precommit": "pretty-quick --staged",
+    "build": "node api/services/init",
+    "prestart": "npm run build",
+    "start": "cross-env NODE_ENV=development node api/server.js",
+    "start-now": "cross-env NODE_ENV=production node api/server.js",
     "debug": "node-debug api/server.js"
   },
   "dependencies": {
@@ -43,5 +45,9 @@
     "winston": "^1.0.1"
   },
   "devDependencies": {
+    "cross-env": "~5.1.4",
+    "husky": "~0.14.3",
+    "prettier": "~1.12.1",
+    "pretty-quick": "~1.4.1"
   }
 }
