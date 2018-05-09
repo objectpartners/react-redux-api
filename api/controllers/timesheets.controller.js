@@ -4,72 +4,77 @@ var Q = require('q'),
   Boom = require('boom');
 
 module.exports = {
-  index: function (request, reply) {
+  index: function(request, reply) {
     var userId = request.params.userId;
     var query = request.query;
 
     if (userId && userId !== 'all') {
-      query = _.extend({user_id: userId}, query);
+      query = _.extend({ user_id: userId }, query);
     }
 
     if (query.page) {
-      db.page('timesheets', query)
+      db
+        .page('timesheets', query)
         .then(reply)
-        .fail(function (err) {
+        .fail(function(err) {
           reply(Boom.badImplementation(err));
         });
-    }
-    else {
-      db.find('timesheets', query)
+    } else {
+      db
+        .find('timesheets', query)
         .then(reply)
-        .fail(function (err) {
+        .fail(function(err) {
           reply(Boom.badImplementation(err));
         });
     }
   },
 
-  create: function (request, reply) {
+  create: function(request, reply) {
     var userId = request.params.userId;
 
     var newTimesheet = request.payload;
     newTimesheet.user_id = userId;
 
-    db.insert('timesheets', newTimesheet)
+    db
+      .insert('timesheets', newTimesheet)
       .then(reply)
-      .fail(function (err) {
+      .fail(function(err) {
         reply(Boom.badImplementation(err));
       });
   },
 
-  show: function (request, reply) {
+  show: function(request, reply) {
     var userId = request.params.userId;
     var id = request.params.timesheetId;
 
-    db.findOne('timesheets', {user_id: userId, _id: id})
+    db
+      .findOne('timesheets', { user_id: userId, _id: id })
       .then(reply)
-      .fail(function (err) {
+      .fail(function(err) {
         reply(Boom.badImplementation(err));
       });
   },
 
-  update: function (request, reply) {
+  update: function(request, reply) {
     var id = request.params.timesheetId;
 
-    db.update('timesheets', {_id: id}, request.payload)
+    db
+      .update('timesheets', { _id: id }, request.payload)
       .then(reply)
-      .fail(function (err) {
+      .fail(function(err) {
         reply(Boom.badImplementation(err));
       });
   },
 
-  destroy: function (request, reply) {
+  destroy: function(request, reply) {
     var id = request.params.timesheetId;
 
-    db.remove('timesheets', {_id: id})
-      .then(function () {
+    db
+      .remove('timesheets', { _id: id })
+      .then(function() {
         reply().code(204);
       })
-      .fail(function (err) {
+      .fail(function(err) {
         reply(Boom.badImplementation(err));
       });
   }

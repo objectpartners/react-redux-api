@@ -2,8 +2,7 @@
 
 var projectsController = require('../controllers/projects.controller');
 
-exports.register = function (server, options, next) {
-
+exports.register = function(server, options, next) {
   var projects = '/projects';
   var projectId = '/projects/{projectId}';
 
@@ -12,31 +11,31 @@ exports.register = function (server, options, next) {
       method: 'GET',
       path: projects,
       handler: projectsController.index,
-      config: {auth: false}
+      config: { auth: false }
     },
     {
       method: 'POST',
       path: projects,
       handler: projectsController.create,
-      config: {auth: false}
+      config: { auth: false }
     },
     {
       method: 'GET',
       path: projectId,
       handler: projectsController.show,
-      config: {auth: false}
+      config: { auth: false }
     },
     {
       method: 'PUT',
       path: projectId,
       handler: projectsController.update,
-      config: {auth: false}
+      config: { auth: false }
     },
     {
       method: 'DELETE',
       path: projectId,
       handler: projectsController.destroy,
-      config: {auth: false}
+      config: { auth: false }
     }
   ]);
 

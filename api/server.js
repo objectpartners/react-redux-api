@@ -30,12 +30,12 @@ server.views({
   path: Path.join(__dirname, 'views')
 });
 
-server.register(cookie, function (err) {
+server.register(cookie, function(err) {
   server.auth.strategy('session', 'cookie', true, {
     password: props.security.cookieSecret,
     isSecure: false,
-    validateFunc: function (request, session, callback) {
-      cache.get(session.sid, function (err, cached) {
+    validateFunc: function(request, session, callback) {
+      cache.get(session.sid, function(err, cached) {
         if (err || !cached) {
           return callback(err, false);
         }
@@ -46,16 +46,16 @@ server.register(cookie, function (err) {
 });
 
 // register the routes
-server.register([
-  require('./routes/auth.routes'),
-  require('./routes/projects.routes'),
-  require('./routes/users.routes')
-], function (err) {
-  if (err) console.log('Error registering routes: ' + err);
-});
-
-// seed the database
-require('./services/data').init();
+server.register(
+  [
+    require('./routes/auth.routes'),
+    require('./routes/projects.routes'),
+    require('./routes/users.routes')
+  ],
+  function(err) {
+    if (err) console.log('Error registering routes: ' + err);
+  }
+);
 
 // start em up
 server.start();
