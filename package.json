@@ -8,7 +8,7 @@
     "build": "node scripts/init",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=development node api/server.js",
-    "start-now": "cross-env NODE_ENV=production node api/server.js",
+    "now-start": "cross-env NODE_ENV=production node api/server.js",
     "debug": "node-debug api/server.js"
   },
   "dependencies": {
