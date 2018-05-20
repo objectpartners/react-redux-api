@@ -12,7 +12,9 @@ server.realm.modifiers.route.prefix = props.server.routePrefix;
 
 server.connection({
   port: props.server.port,
-  host: 'localhost'
+  routes: {
+    cors: true
+  }
 });
 
 // establish a session cache

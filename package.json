@@ -1,5 +1,5 @@
 {
-  "name": "@objectpartners/timesheets-api",
+  "name": "timesheets-api",
   "main": "./api/server.js",
   "description": "Timesheet API backend for React Redux training labs",
   "version": "1.0.0",
