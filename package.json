@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "scripts": {
     "precommit": "pretty-quick --staged",
-    "build": "node api/services/init",
+    "build": "node scripts/init",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=development node api/server.js",
     "start-now": "cross-env NODE_ENV=production node api/server.js",

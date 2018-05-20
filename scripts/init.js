@@ -1,6 +1,7 @@
 var _ = require('lodash'),
-  db = require('./db'),
-  Q = require('q');
+  db = require('../api/services/db'),
+  Q = require('q'),
+  path = require('path');
 
 init();
 
@@ -22,10 +23,11 @@ function init() {
 ////////////  USERS //////////////////
 function seed() {
   console.log('Seeding Users into DB');
-  var users = require('../data/users').users;
-  var adminTimesheets = require('../data/admin.timesheets').timesheets;
-  var userTimesheets = require('../data/user.timesheets').timesheets;
-  var projects = require('../data/projects').projects;
+  var base = path.join(__dirname, '../api/data');
+  var users = require(path.join(base, 'users')).users;
+  var adminTimesheets = require(path.join(base, 'admin.timesheets')).timesheets;
+  var userTimesheets = require(path.join(base, 'user.timesheets')).timesheets;
+  var projects = require(path.join(base, 'projects')).projects;
 
   Q.all([
     db.insert('projects', projects[0]),
