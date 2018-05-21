@@ -5,10 +5,10 @@
   "version": "1.0.0",
   "scripts": {
     "precommit": "pretty-quick --staged",
-    "build": "node scripts/init",
-    "prestart": "npm run build",
+    "now-build": "npm run seed",
+    "seed": "node scripts/init",
+    "prestart": "npm run seed",
     "start": "cross-env NODE_ENV=development node api/server.js",
-    "prenow-start": "ls api/data/db",
     "now-start": "cross-env NODE_ENV=production node api/server.js",
     "debug": "node-debug api/server.js"
   },
