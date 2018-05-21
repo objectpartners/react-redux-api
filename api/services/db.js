@@ -5,7 +5,7 @@ module.exports = (function() {
     path = require('path');
 
   var db;
-  var base = path.join(__dirname, '../data/db');
+  var base = path.resolve('db');
   var initDb = function initDb() {
     db = {};
 

@@ -1,0 +1,20 @@
+module.exports = {
+  users: [
+    {
+      username: 'admin',
+      email: 'admin@mixtape.com',
+      password: 'password',
+      admin: true,
+      firstName: 'Admin',
+      lastName: 'User'
+    },
+    {
+      username: 'user',
+      email: 'user@mixtape.com',
+      password: 'password',
+      admin: false,
+      firstName: 'Normal',
+      lastName: 'User'
+    }
+  ]
+};
