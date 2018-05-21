@@ -1,30 +1,34 @@
 module.exports = (function() {
   var DataStore = require('nedb'),
     Q = require('q'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    path = require('path');
 
   var db;
+  var base = path.resolve(
+    process.env.NODE_ENV === 'production' ? '/tmp/db' : 'db'
+  );
   var initDb = function initDb() {
     db = {};
 
     db.users = new DataStore({
-      filename: 'api/data/db/users.json',
+      filename: path.join(base, 'users.json'),
       autoload: true
     });
     db.users.ensureIndex({ fieldName: 'username', unique: true });
     db.users.ensureIndex({ fieldName: 'email', unique: true });
 
     db.timesheets = new DataStore({
-      filename: 'api/data/db/timesheets.json',
+      filename: path.join(base, 'timesheets.json'),
       autoload: true
     });
     db.timeunits = new DataStore({
-      filename: 'api/data/db/timeunits.json',
+      filename: path.join(base, 'timeunits.json'),
       autoload: true
     });
 
     db.projects = new DataStore({
-      filename: 'api/data/db/projects.json',
+      filename: path.join(base, 'projects.json'),
       autoload: true
     });
     db.projects.ensureIndex({ fieldName: 'name', unique: true });

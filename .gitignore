@@ -1,4 +1,3 @@
-
 .DS_Store
 
 client/dist/*
@@ -14,7 +13,6 @@ client/cache.manifest
 libpeerconnection.log
 
 dist
-
-api/data/db/*
+/db
 
 npm-debug.log
