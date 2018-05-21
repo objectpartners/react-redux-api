@@ -6,7 +6,7 @@ module.exports = (function() {
 
   var db;
   var base = path.resolve(
-    process.env.NODE_ENV === 'development' ? 'db' : '/tmp/db'
+    process.env.NODE_ENV === 'production' ? '/tmp/db' : 'db'
   );
   var initDb = function initDb() {
     db = {};

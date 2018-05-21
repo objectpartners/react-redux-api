@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "scripts": {
     "precommit": "pretty-quick --staged",
-    "now-build": "npm run seed",
+    "now-build": "cross-env NODE_ENV=production npm run seed",
     "seed": "node scripts/init",
     "prestart": "npm run seed",
     "start": "cross-env NODE_ENV=development node api/server.js",
