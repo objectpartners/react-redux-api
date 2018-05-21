@@ -49,6 +49,7 @@ server.register(cookie, function(err) {
 // register the routes
 server.register(
   [
+    require('./routes/ping.routes'),
     require('./routes/auth.routes'),
     require('./routes/projects.routes'),
     require('./routes/users.routes')
