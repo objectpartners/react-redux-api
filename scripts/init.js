@@ -1,7 +1,8 @@
 var _ = require('lodash'),
   db = require('../api/services/db'),
   Q = require('q'),
-  path = require('path');
+  path = require('path'),
+  log = require('../api/logger');
 
 init();
 
@@ -10,39 +11,36 @@ function init() {
     .findOne('users', { username: 'admin' })
     .then(function(user) {
       if (user === null) {
-        seed();
+        seed(function() {
+          log.info('Finished seeding database');
+        });
       } else {
-        console.log('Found user. DB already seeded.');
+        log.debug('Found user. DB already seeded.');
       }
     })
     .fail(function(err) {
-      console.log('Error : ' + err);
+      log.error('Error : ' + err);
     });
 }
 
 ////////////  USERS //////////////////
-function seed() {
-  console.log('Seeding Users into DB');
+function seed(callback) {
+  log.debug('Seeding Users into DB');
   var base = path.join(__dirname, '../api/data');
   var users = require(path.join(base, 'users')).users;
   var adminTimesheets = require(path.join(base, 'admin.timesheets')).timesheets;
   var userTimesheets = require(path.join(base, 'user.timesheets')).timesheets;
   var projects = require(path.join(base, 'projects')).projects;
 
-  Q.all([
-    db.insert('projects', projects[0]),
-    db.insert('projects', projects[1]),
-    db.insert('projects', projects[2])
-  ])
-
+  Q.all(projects.map(project => db.insert('projects', project)))
     .then(function() {
       var userPromises = [];
 
       _.forEach(users, function(user) {
-        console.log('Seeding ' + user.username);
+        log.debug('Seeding ' + user.username);
 
         db.insert('users', user).then(function(newUser) {
-          console.log('Created ' + newUser.username);
+          log.debug('Created ' + newUser.username);
 
           var timesheets =
             user.username === 'admin' ? adminTimesheets : userTimesheets;
@@ -54,14 +52,12 @@ function seed() {
             db
               .insert('timesheets', timesheetModel)
               .then(function(newTimesheet) {
-                console.log(
-                  'Seeding timeunits : ' + timesheet.timeunits.length
-                );
+                log.debug('Seeding timeunits : ' + timesheet.timeunits.length);
 
                 _.forEach(timesheet.timeunits, function(timeunit) {
                   timeunit.timesheet_id = newTimesheet._id;
 
-                  console.log(
+                  log.debug(
                     'Attempting to seed timeunit : ' + timeunit.project
                   );
                   db
@@ -71,12 +67,12 @@ function seed() {
                       return db.insert('timeunits', timeunit);
                     })
                     .then(function(newTimeunit) {
-                      console.log(
+                      log.debug(
                         'Created timeunit for ' + newTimeunit.dateWorked
                       );
                     })
                     .fail(function(err) {
-                      console.log('Error : ' + err);
+                      log.error('Error : ' + err);
                     });
                 });
               });
@@ -84,12 +80,11 @@ function seed() {
         });
       });
     })
-
     .then(function() {
-      console.log('Created user ' + user.username + ' and timesheets.');
+      log.debug('Created user ' + user.username + ' and timesheets.');
     })
-
+    .then(callback)
     .fail(function(err) {
-      console.log('Error creating ' + user.username + ' : ' + err);
+      log.error('Error creating ' + user.username + ' : ' + err);
     });
 }

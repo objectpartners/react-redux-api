@@ -3,8 +3,7 @@ var Good = require('good');
 var Path = require('path');
 var cookie = require('hapi-auth-cookie');
 var props = require('./properties');
-
-console.log('Booting Development Server');
+var log = require('./logger');
 
 var server = new Hapi.Server();
 
@@ -55,7 +54,14 @@ server.register(
     require('./routes/users.routes')
   ],
   function(err) {
-    if (err) console.log('Error registering routes: ' + err);
+    if (err) {
+      log.error(err);
+    } else {
+      log.info({
+        message: 'Started HTTP server',
+        port: props.server.port
+      });
+    }
   }
 );
 

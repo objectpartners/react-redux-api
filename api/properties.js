@@ -3,6 +3,8 @@
 module.exports = {
   appName: 'timesheet-api',
 
+  logLevel: 'info',
+
   session: {
     secret: 'd0853b30-3d95-11e2-a25f-0800200c9a66', // uuid hash
     expires: 3 * 24 * 60 * 60 * 1000,
