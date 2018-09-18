@@ -1,4 +1,4 @@
-exports.register = function(server, options, next) {
+exports.register = function(server, options) {
   var ping = '/ping';
 
   var handler = require('../controllers/ping.controller');
@@ -10,11 +10,7 @@ exports.register = function(server, options, next) {
       config: { handler: handler.index, auth: false }
     }
   ]);
-
-  return next();
 };
 
-exports.register.attributes = {
-  name: 'ping-routes',
-  version: '0.0.1'
-};
+exports.name = 'ping-routes';
+exports.version = '0.0.1';

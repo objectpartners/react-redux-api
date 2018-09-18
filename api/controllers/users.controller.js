@@ -5,73 +5,73 @@ module.exports = {
     var query = request.query;
 
     if (query.page) {
-      db
+      return db
         .page('users', query)
         .then(function(users) {
-          reply(users);
+          return users;
         })
         .fail(function(err) {
-          reply(err).code(500);
+          return Boom.badImplementation(err);
         });
     } else {
-      db
+      return db
         .find('users', query)
         .then(function(users) {
-          reply(users);
+          return users;
         })
         .fail(function(err) {
-          reply(err).code(500);
+          return Boom.badImplementation(err);
         });
     }
   },
 
   create: function(request, reply) {
-    db
+    return db
       .insert('users', request.payload)
       .then(function(user) {
-        reply(user);
+        return user;
       })
       .fail(function(err) {
-        reply(err).code(500);
+        return Boom.badImplementation(err);
       });
   },
 
   show: function(request, reply) {
     var id = request.params.userId;
 
-    db
+    return db
       .findOne('users', { _id: id })
       .then(function(user) {
-        reply(user);
+        return user;
       })
       .fail(function(err) {
-        reply(err).code(500);
+        return Boom.badImplementation(err);
       });
   },
 
   update: function(request, reply) {
     var id = request.params.userId;
 
-    db
+    return db
       .update('users', { _id: id }, request.payload)
       .then(function(user) {
-        reply(user);
+        return user;
       })
       .fail(function(err) {
-        reply(err).code(500);
+        return Boom.badImplementation(err);
       });
   },
 
   destroy: function(request, reply) {
     var id = request.params.userId;
 
-    db
+    return db
       .remove('users', { _id: id })
       .then(function() {
-        res.send(200);
+        return;
       })
       .fail(function(err) {
-        reply(err).code(500);
+        return Boom.badImplementation(err);
       });
   }
 };

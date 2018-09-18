@@ -8,21 +8,24 @@ module.exports = {
   login: login
 };
 
-function sendCurrentUser(request, reply) {
-  request.server.app.cache.get(props.session.secret, function(err, auth) {
+function sendCurrentUser(request) {
+  return request.server.app.apiCache.get(props.session.secret, function(
+    err,
+    auth
+  ) {
     var currentUser = auth ? auth.user : null;
-    reply(sanitize(currentUser));
+    return sanitize(currentUser);
   });
 }
 
-function login(request, reply) {
+function login(request) {
   var authenticatedUser;
 
   if (!request.payload.username || !request.payload.password) {
-    return reply(Boom.unauthorized('Missing username or password')).code(401);
+    return Boom.unauthorized('Missing username or password');
   }
 
-  db
+  return db
     .findOne('users', { username: request.payload.username })
     .then(function(user) {
       authenticatedUser = user;
@@ -30,28 +33,23 @@ function login(request, reply) {
     })
     .then(function(isValid) {
       if (!isValid) {
-        Q.reject(Boom.unauthorized('Invalid username or password'));
+        return Q.reject(Boom.unauthorized('Invalid username or password'));
       }
 
-      return setSession(request, props.session.secret, {
+      return request.server.app.apiCache.set(props.session.secret, {
         user: authenticatedUser
       });
     })
     .then(function() {
-      request.auth.session.set({ sid: props.session.secret });
-      return reply(sanitize(authenticatedUser));
+      return sanitize(authenticatedUser);
     })
     .fail(function(err) {
-      reply(Boom.unauthorized(err.message)).code(401);
+      return Boom.unauthorized(err.message);
     });
 }
 
 function validate(password, userPassword) {
   return Q(password === userPassword);
-}
-
-function setSession(request, sid, cacheObject) {
-  return Q.ninvoke(request.server.app.cache, 'set', sid, cacheObject, 0);
 }
 
 function sanitize(user) {

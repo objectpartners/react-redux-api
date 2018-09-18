@@ -7,71 +7,71 @@ module.exports = {
     var query = request.query;
 
     if (query.page) {
-      db
+      return db
         .page('projects', query)
         .then(reply)
         .fail(function(err) {
-          reply(Boom.badImplementation(err));
+          return Boom.badImplementation(err);
         });
     } else {
-      db
+      return db
         .find('projects', query)
         .then(function(projects) {
-          reply(projects);
+          return projects;
         })
         .fail(function(err) {
-          reply(Boom.badImplementation(err));
+          return Boom.badImplementation(err);
         });
     }
   },
 
   create: function(request, reply) {
-    db
+    return db
       .insert('projects', request.payload)
       .then(function(project) {
-        reply(project);
+        return project;
       })
       .fail(function(err) {
-        reply(Boom.badImplementation(err));
+        return Boom.badImplementation(err);
       });
   },
 
   show: function(request, reply) {
     var id = request.params.projectId;
 
-    db
+    return db
       .findOne('projects', { _id: id })
       .then(function(project) {
-        reply(project);
+        return;
       })
       .fail(function(err) {
-        reply(Boom.badImplementation(err));
+        return Boom.badImplementation(err);
       });
   },
 
   update: function(request, reply) {
     var id = request.params.projectId;
 
-    db
+    return db
       .update('projects', { _id: id }, request.payload)
       .then(function(project) {
-        reply(project);
+        return project;
       })
       .fail(function(err) {
-        reply(Boom.badImplementation(err));
+        return Boom.badImplementation(err);
       });
   },
 
   destroy: function(request, reply) {
     var id = request.params.projectId;
 
-    db
+    return db
       .remove('projects', { _id: id })
       .then(function() {
-        reply().code(200);
+        return;
       })
       .fail(function(err) {
-        reply(Boom.badImplementation(err));
+        return Boom.badImplementation(err);
       });
   }
 };

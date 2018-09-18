@@ -13,18 +13,18 @@ module.exports = {
     }
 
     if (query.page) {
-      db
+      return db
         .page('timesheets', query)
         .then(reply)
         .fail(function(err) {
-          reply(Boom.badImplementation(err));
+          return Boom.badImplementation(err);
         });
     } else {
-      db
+      return db
         .find('timesheets', query)
         .then(reply)
         .fail(function(err) {
-          reply(Boom.badImplementation(err));
+          return Boom.badImplementation(err);
         });
     }
   },
@@ -35,11 +35,11 @@ module.exports = {
     var newTimesheet = request.payload;
     newTimesheet.user_id = userId;
 
-    db
+    return db
       .insert('timesheets', newTimesheet)
       .then(reply)
       .fail(function(err) {
-        reply(Boom.badImplementation(err));
+        return Boom.badImplementation(err);
       });
   },
 
@@ -47,35 +47,35 @@ module.exports = {
     var userId = request.params.userId;
     var id = request.params.timesheetId;
 
-    db
+    return db
       .findOne('timesheets', { user_id: userId, _id: id })
       .then(reply)
       .fail(function(err) {
-        reply(Boom.badImplementation(err));
+        return Boom.badImplementation(err);
       });
   },
 
   update: function(request, reply) {
     var id = request.params.timesheetId;
 
-    db
+    return db
       .update('timesheets', { _id: id }, request.payload)
       .then(reply)
       .fail(function(err) {
-        reply(Boom.badImplementation(err));
+        return Boom.badImplementation(err);
       });
   },
 
   destroy: function(request, reply) {
     var id = request.params.timesheetId;
 
-    db
+    return db
       .remove('timesheets', { _id: id })
       .then(function() {
-        reply().code(204);
+        return;
       })
       .fail(function(err) {
-        reply(Boom.badImplementation(err));
+        return Boom.badImplementation(err);
       });
   }
 };

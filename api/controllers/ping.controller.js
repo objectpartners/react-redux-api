@@ -1,7 +1,7 @@
 module.exports = {
-  index(request, reply) {
-    return reply({
+  index(request) {
+    return {
       message: 'pong'
-    });
+    };
   }
 };

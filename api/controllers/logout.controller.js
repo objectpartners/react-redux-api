@@ -1,8 +1,10 @@
 'use strict';
+var props = require('../properties');
 
 module.exports = {
-  logout: function(request, reply) {
-    request.auth.session.clear();
-    return reply();
+  logout: function(request) {
+    request.cookieAuth.clear();
+    request.server.app.apiCache.drop(props.session.secret);
+    return null;
   }
 };

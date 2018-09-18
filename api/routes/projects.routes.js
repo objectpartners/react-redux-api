@@ -2,7 +2,7 @@
 
 var projectsController = require('../controllers/projects.controller');
 
-exports.register = function(server, options, next) {
+exports.register = function(server, options) {
   var projects = '/projects';
   var projectId = '/projects/{projectId}';
 
@@ -38,11 +38,7 @@ exports.register = function(server, options, next) {
       config: { auth: false }
     }
   ]);
-
-  return next();
 };
 
-exports.register.attributes = {
-  name: 'projects-routes',
-  version: '0.0.1'
-};
+exports.name = 'projects-routes';
+exports.version = '0.0.1';
