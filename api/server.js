@@ -65,7 +65,7 @@ server
     } else {
       log.info({
         message: 'Started HTTP server',
-        port: props.server.port
+        port: process.env.PORT || props.server.port
       });
     }
   })
